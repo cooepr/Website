@@ -1,0 +1,761 @@
+:root {
+    /* Light Mode Colors */
+    --color-background: #ffffff; /* Cleaner white background */
+    --color-background-alt: #f8f9fa; /* Off-white for alternating sections */
+    --color-foreground: #ffffff; /* Card/Header Background */
+    --color-header-background: var(--color-foreground);
+    --color-primary: #0056b3;    /* Updated: Engaging Blue */
+    --color-secondary: #17a2b8;  /* Updated: Bright Teal */
+    --color-accent: #ffc107;     /* Updated: Vivid Gold/Amber */
+    --color-text: #212529;       /* Darker Grey/Black */
+    --color-text-muted: #5a6169; /* Medium Grey */
+    --color-text-subtle: #868e96; /* Lighter Grey */
+    --color-border: #e9ecef;     /* Lighter Border */
+    --color-highlight: var(--color-secondary); /* Will use the updated secondary */
+    --color-button-text: #ffffff;
+    --color-shadow: rgba(0, 0, 0, 0.06);
+    --color-shadow-hover: rgba(0, 0, 0, 0.1);
+    --color-icon-background: #e9ecef;
+    --color-input-background: #ffffff;
+    --color-input-border: #ced4da;
+    --gradient-start-light: hsl(210, 50%, 96%); /* Updated: Very light, slightly cool tone */
+    --color-focus-ring: rgba(23, 162, 184, 0.25); /* New: For form input focus glow */
+
+    /* Fonts */
+    --font-logo: 'Playfair Display', serif;
+    --font-body: 'Nunito Sans', sans-serif;
+    --font-heading: 'Lato', sans-serif; /* Change heading font to Lato */
+
+    /* Other Variables */
+    --header-height: 75px;
+    --border-radius: 6px; /* Slightly smaller radius */
+    --transition-speed: 0.25s;
+}
+
+body.dark-mode {
+    /* Dark Mode Colors (New Palette) */
+    --color-background: #1A202C;        /* New: Dark Slate/Charcoal */
+    --color-background-alt: #222B38;   /* New: Slightly Lighter Charcoal for alternating sections */
+    --color-foreground: #2D3748;        /* New: Darker Card/Header Background */
+    --color-header-background: var(--color-foreground);
+    --color-primary: #A0AEC0;           /* New: Calm Light Grey (for headings, service card border) */
+    --color-secondary: #63B3ED;         /* New: Softer Sky Blue (for highlights, icons, buttons) */
+    --color-accent: #FACC15;            /* Kept: Gold for specific accents if needed */
+    --color-text: #E2E8F0;              /* Kept: Light Grey Text */
+    --color-text-muted: #8FA3BF;        /* New: Softer muted text */
+    --color-text-subtle: #718096;       /* Kept: For very subtle text */
+    --color-border: #4A5568;            /* Kept: Darker Border */
+    --color-highlight: var(--color-secondary); /* Uses the new Softer Sky Blue */
+    --color-button-text: #1A202C;       /* New: Dark text for the new light blue buttons */
+    --color-shadow: rgba(0, 0, 0, 0.3); /* Adjusted shadow for new BG */
+    --color-shadow-hover: rgba(0, 0, 0, 0.4);
+    --color-icon-background: #4a5568;   /* Kept */
+    --color-input-background: #222B38;  /* Slightly adjusted input background */
+    --color-input-border: #4a5568;      /* Kept */
+    --gradient-start-dark: hsl(220, 20%, 15%); /* New: Very dark, desaturated blue for gradient */
+    --color-focus-ring: rgba(99, 179, 237, 0.25); /* New: For form input focus glow */
+    /* Apply dark gradient to body */
+    background-image: linear-gradient(135deg, var(--gradient-start-dark), var(--color-background) 70%);
+}
+
+/* Basic styling */
+body {
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--color-text);
+    background-color: var(--color-background); /* Fallback color */
+    /* Apply gradient to body */
+    background-image: linear-gradient(135deg, var(--gradient-start-light), var(--color-background) 70%); /* Updated gradient stop */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Make gradient cover viewport */
+    min-height: 100vh; /* Ensure body fills viewport */
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, background-image var(--transition-speed) ease;
+}
+
+/* Header Styling - Centered Content */
+header {
+    background-color: var(--color-header-background);
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 3px var(--color-shadow);
+    display: flex; /* Use flex to center the container */
+    justify-content: center; /* Center the inner container */
+    align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    transition: top 0.4s ease-in-out, background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    padding: 0 1.5rem; /* Add some horizontal padding */
+}
+
+.header-center-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out elements */
+    width: 100%;
+    max-width: 1200px; /* Max width for header content */
+}
+
+header.header-hidden {
+    top: calc(-1 * var(--header-height) - 5px);
+}
+
+/* Nav styles */
+header nav {
+    flex-grow: 1; /* Allow navs to take space */
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; /* Adjust gap */
+}
+
+.nav-left ul {
+    justify-content: flex-end; /* Align left nav items to the right */
+}
+
+.nav-right ul {
+    justify-content: flex-start; /* Align right nav items to the left */
+}
+
+.logo {
+    text-align: center; /* Center logo */
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: calc(var(--header-height) * 0.85); /* Increased logo height */
+    display: flex;
+    align-items: center;
+    /* Remove margin-right, handled by space-between */
+    /* Add some horizontal padding around logo */
+    padding: 0 1rem;
+}
+
+.logo a,
+.logo img {
+    height: 100%; /* Ensure image scales with container */
+    width: auto; /* Maintain aspect ratio */
+    display: block;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 0.9rem; /* Slightly smaller nav text */
+    font-weight: 600;
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    position: relative;
+    transition: color var(--transition-speed) ease;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--color-highlight);
+    border-bottom-color: var(--color-highlight);
+}
+
+/* Theme Toggle Button - Adjust positioning if needed */
+.theme-toggle-button {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    font-size: 1.1rem; /* Slightly larger icon */
+    line-height: 1;
+    transition: color var(--transition-speed) ease, background-color var(--transition-speed) ease;
+    /* margin-left: auto; /* Push to the far right */
+    /* Removed margin-left from previous attempt */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.theme-toggle-button:hover {
+    color: var(--color-highlight);
+    background-color: transparent; /* No background on hover */
+    border-color: transparent;
+}
+
+/* Base Section Styling */
+section {
+    padding: 5rem 2rem; /* Adjusted padding */
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    /* Apply default background based on theme */
+    background-color: var(--color-background);
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+.container {
+    max-width: 1140px; /* Standard container width */
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Headings */
+h1, h2, h3 {
+    font-family: var(--font-heading); /* Apply heading font */
+    color: var(--color-text);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+h2 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--color-primary); /* Added: Use primary color */
+}
+
+/* Section Intro Text */
+.section-intro {
+    text-align: center;
+    color: var(--color-text-muted);
+    max-width: 700px;
+    margin: 0 auto 1rem auto; /* Center and add margin below */
+    font-size: 1.1rem;
+}
+
+/* Home Hero Section Styling */
+.home-hero {
+    /* background-color: var(--color-background); /* REMOVE explicit background */
+    background-color: transparent; /* Let body gradient show through */
+    color: var(--color-text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: calc(var(--header-height) + 4rem) 2rem 6rem 2rem;
+    box-sizing: border-box;
+    border-bottom: none;
+    /* REMOVE background-image from here */
+    /* background-image: linear-gradient(135deg, var(--gradient-start-light), var(--color-background) 70%); */
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.hero-container {
+     display: flex; /* Enable flex for image */
+     gap: 3rem;
+     align-items: center;
+}
+
+.hero-content {
+    flex: 1; /* Take available space */
+    max-width: 650px;
+}
+
+.hero-subheading {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.8rem;
+    display: inline-block;
+}
+
+.home-hero h1 {
+    font-size: clamp(2.8rem, 6vw, 4.2rem);
+    color: var(--color-text);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.highlight {
+    color: var(--color-highlight);
+}
+
+.hero-description {
+    font-size: 1.15rem;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+}
+
+.hero-button {
+    background-color: transparent;
+    color: var(--color-highlight);
+    border: 2px solid var(--color-highlight);
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    box-shadow: none;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.hero-button:hover {
+    background-color: var(--color-highlight);
+    color: var(--color-background);
+    transform: none;
+    box-shadow: none;
+}
+
+.hero-image-container {
+    flex: 1;
+    max-width: 450px; /* Control image width */
+    display: none; /* Hide image by default */
+}
+
+@media (min-width: 992px) { /* Show image on larger screens */
+    .hero-image-container {
+        display: block;
+    }
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    background-color: var(--color-icon-background);
+    min-height: 250px; /* Placeholder height */
+    object-fit: cover;
+}
+
+/* Services Section Styling */
+/* #services might get background-alt applied via JS/nth-of-type if re-enabled */
+
+.services-grid {
+    display: grid; /* Change back to grid */
+    /* Use responsive grid like portfolio */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; /* Gap between grid items */
+    /* Remove column-specific styles */
+    /* max-width: 700px; */
+    /* margin: 0 auto; */
+}
+
+.service-card {
+    background-color: var(--color-foreground);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-primary); /* Added: Primary color top border */
+    box-shadow: 0 3px 7px var(--color-shadow);
+    text-align: left;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex; /* Add flex to control inner content */
+    flex-direction: column; /* Stack content vertically */
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 16px var(--color-shadow-hover);
+    border-color: var(--color-secondary);
+}
+
+.service-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.service-icon {
+    font-size: 2rem; /* Updated: Icon size increased */
+    color: var(--color-highlight); /* Updated: Use highlight color */
+    background-color: transparent; /* Remove background */
+    width: auto;
+    height: auto;
+    margin-bottom: 0;
+}
+
+.service-card h3 {
+    font-size: 1.35rem; /* Updated: Increased font size */
+    margin-bottom: 0.5rem; /* Adjusted margin for better spacing */
+    font-weight: 700; /* Ensure strong weight */
+    color: var(--color-primary); /* Added: Use primary color */
+}
+
+.service-card p,
+.service-card ul {
+    /* Allow these elements to grow as needed */
+    margin-bottom: 1rem; /* Ensure spacing */
+}
+
+.service-card ul {
+    flex-grow: 1; /* Allow ul to take up space to push button down */
+}
+
+/* New Learn More Button Style */
+.service-learn-more {
+    display: inline-block; /* For proper padding and margin */
+    text-decoration: none;
+    background-color: var(--color-highlight); /* Updated: Solid background */
+    color: var(--color-button-text); /* Updated: Text color for contrast */
+    border: 2px solid var(--color-highlight); /* Keep border matching background or remove */
+    padding: 0.7rem 1.6rem; /* Adjusted padding slightly */
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease, filter var(--transition-speed) ease;
+    margin-top: auto; /* Push button to the bottom of the flex container */
+    align-self: flex-start; /* Align to the start (left) if container is wider */
+}
+
+.service-learn-more:hover {
+    background-color: var(--color-highlight); /* Keep same background */
+    filter: brightness(90%); /* Updated: Darken on hover */
+    color: var(--color-button-text); /* Keep text color */
+    border-color: var(--color-highlight); /* Keep border matching */
+}
+
+/* Portfolio Section */
+/* #portfolio background should be var(--color-background) */
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 1.5rem; /* Gap between portfolio items */
+}
+
+.portfolio-item {
+    background-color: var(--color-foreground); /* Fallback */
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    /* padding: 1.5rem; /* Remove padding from item, apply to content */
+    box-shadow: 0 3px 7px var(--color-shadow);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    /* display: flex; /* Remove flex direction */
+    /* flex-direction: column; */
+    position: relative; /* Make this the positioning context */
+    overflow: hidden; /* Ensure content overlay respects border-radius */
+    min-height: 250px; /* Ensure item has some height */
+}
+
+.portfolio-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 16px var(--color-shadow-hover);
+    border-color: var(--color-secondary);
+    /* Optional: Enhance overlay or text on hover */
+}
+
+.portfolio-item img {
+    width: 100%;
+    /* height: 180px; /* Change height to fill container */
+    height: 100%;
+    object-fit: cover;
+    /* border-radius: var(--border-radius) var(--border-radius) 0 0; /* Remove specific radius */
+    border-radius: inherit; /* Inherit from parent */
+    /* margin-bottom: 1rem; /* No margin needed */
+    background-color: var(--color-icon-background);
+    display: block; /* Ensure no extra space below image */
+    transition: transform 0.4s ease; /* Add transition for potential hover zoom */
+}
+
+.portfolio-item:hover img {
+     transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.portfolio-content {
+    position: absolute; /* Position over the image */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.0) 40%, rgba(0, 0, 0, 0.7) 80%); /* Dark overlay gradient from bottom */
+    color: #ffffff; /* White text for contrast */
+    padding: 1.5rem; /* Add padding back */
+    box-sizing: border-box; /* Include padding in dimensions */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align text to the bottom */
+    text-align: left;
+    transition: background-color var(--transition-speed) ease; /* Smooth transition */
+}
+
+/* Optional: Slightly darker overlay on hover */
+/* .portfolio-item:hover .portfolio-content {
+    background: linear-gradient(rgba(0, 0, 0, 0.2) 20%, rgba(0, 0, 0, 0.8) 80%);
+} */
+
+.portfolio-content h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff; /* Ensure white text */
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Add text shadow for readability */
+}
+
+.portfolio-content p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9); /* Slightly off-white */
+    line-height: 1.5;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* About Section */
+/* #about has background-color: var(--color-background-alt); */
+/* ... about styles using variables ... */
+
+/* Contact Section */
+/* #contact has background-color: var(--color-background); */
+
+.contact-form {
+    background-color: var(--color-foreground);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 3px 7px var(--color-shadow);
+    padding: 2.8rem; /* Updated padding */
+    border-radius: var(--border-radius);
+    max-width: 750px; /* Make form slightly wider */
+    margin: 0 auto; /* Center the form */
+}
+
+.form-group {
+    margin-bottom: 1.5rem; /* Space between form groups */
+}
+
+.form-group label {
+    display: block; /* Ensure label is on its own line */
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%; /* Make inputs fill container width */
+    box-sizing: border-box; /* Include padding/border in width */
+    border: 1px solid var(--color-input-border);
+    background-color: var(--color-input-background);
+    color: var(--color-text);
+    border-radius: var(--border-radius);
+    padding: 0.9rem 1.1rem; /* Updated: Consistent padding */
+    font-size: 1rem; /* Slightly larger font for readability */
+    line-height: 1.5;
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+/* Specific height for textarea */
+.form-group textarea {
+    min-height: 150px; /* Set a decent minimum height */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--color-highlight);
+    box-shadow: 0 0 0 3px var(--color-focus-ring); /* Updated focus glow */
+    background-color: var(--color-foreground);
+}
+
+.submit-button {
+    /* Updated style for contact form button */
+    background-color: var(--color-highlight);
+    color: var(--color-button-text);
+    border: none; /* Removed border */
+    padding: 0.9rem 2rem; /* Adjusted padding */
+    font-weight: 700;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added subtle shadow */
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, filter var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.submit-button:hover {
+    filter: brightness(90%);
+    transform: translateY(-1px); /* Added slight lift */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--color-background); /* Match main background */
+    color: var(--color-text-subtle); /* Subtle text */
+    margin-top: 0;
+    border-top: 1px solid var(--color-border);
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+/* ... Service Detail Page Styling using variables ... */
+.service-detail-page {
+    background-color: var(--color-background);
+    /* ... */
+}
+
+/* ... Animation ... */
+/* ... Fixed header adjustments ... */
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 992px) {
+    /* Adjustments for medium screens/tablets if needed */
+    .hero-container {
+        flex-direction: column; /* Stack hero content and image if shown */
+        text-align: center; /* Center text when stacked */
+    }
+    .hero-content {
+        max-width: 100%; /* Allow text to take full width */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Header Adjustments for Mobile */
+    header {
+        /* Make header scroll with page on mobile */
+        position: static; 
+        height: auto; /* Let height adjust to content */
+        box-shadow: none; /* Optional: Remove shadow for non-fixed header */
+        /* Padding might need adjustment if static */
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .header-center-container {
+        flex-wrap: wrap; /* Allow items to wrap */
+        justify-content: center; /* Center items when wrapped */
+        padding: 0 1rem; /* Adjust padding */
+    }
+    .logo {
+        order: -1; /* Move logo to the top visually */
+        width: 100%; /* Take full width */
+        justify-content: center; /* Center logo image within its container */
+        padding: 0; /* Remove specific padding */
+        height: auto; /* Let container adjust */
+        margin-bottom: 0.5rem; /* Space below logo */
+    }
+    /* Override logo image size specifically for mobile */
+    .logo img {
+        height: 45px; /* Set a fixed, smaller height */
+        width: auto;
+    }
+    header nav {
+        flex-grow: 0; /* Don't grow */
+        width: 100%; /* Make nav container full width */
+        order: 1; /* Position navs below logo */
+    }
+    header nav ul {
+        justify-content: center; /* Center nav items */
+        gap: 0.5rem; /* Reduce gap */
+        flex-wrap: wrap; /* Allow nav items to wrap if needed */
+        /* width: 100%; */ /* Let flexbox handle centering */
+    }
+    .nav-left,
+    .nav-right {
+        width: 100%; /* Stack navs vertically */
+        /* Remove 50% width */
+    }
+    .nav-left ul {
+        justify-content: center; /* Ensure centering */
+    }
+    .nav-right ul {
+        justify-content: center; /* Ensure centering */
+        margin-top: 0.2rem; /* Add small space between stacked navs */
+    }
+
+    .theme-toggle-button {
+        /* Remove absolute positioning */
+        /* position: absolute; */
+        /* top: 50%; */
+        /* right: 1rem; */
+        /* transform: translateY(-50%); */
+        order: 2; /* Place it after nav links in flow */
+        /* Add margin for spacing and centering */
+        margin: 0.5rem auto; 
+        display: block; /* Ensure it takes block characteristics for margin auto */
+    }
+
+    /* Section Padding */
+    section {
+        padding: 3rem 1rem; /* Reduce padding */
+    }
+
+    /* Hero Section Padding - Keep this adjustment */
+    .home-hero {
+        /* Remove calc() - header is no longer fixed */
+        padding: 4rem 1rem; 
+        min-height: auto; /* Allow height to shrink on mobile if needed */
+        /* Ensure background remains transparent */
+        background-color: transparent;
+    }
+
+    /* Hero Section Text */
+    .home-hero h1 {
+        font-size: clamp(2.2rem, 8vw, 3rem); /* Reduce h1 size */
+    }
+    .hero-description {
+        font-size: 1rem; /* Reduce description size */
+    }
+
+    /* General Heading Size */
+    h2 {
+        font-size: 1.8rem; /* Reduce h2 size */
+    }
+
+    /* Grid Adjustments (Ensure stacking) */
+    .services-grid,
+    .portfolio-grid {
+        grid-template-columns: 1fr; /* Force single column */
+        gap: 1rem; /* Adjust gap for single column */
+    }
+
+    /* Contact Form */
+    .contact-form {
+        padding: 1.5rem; /* Reduce form padding */
+    }
+
+     /* About Section Layout */
+    .about-content {
+        flex-direction: column; /* Stack text and image */
+        gap: 1.5rem;
+    }
+    .about-image {
+        order: -1; /* Move image above text on mobile */
+        max-width: 250px; /* Limit image size */
+        margin: 0 auto; /* Center image */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further adjustments for very small screens */
+    .home-hero h1 {
+        font-size: 2rem; /* Further reduce h1 */
+    }
+    h2 {
+        font-size: 1.6rem; /* Further reduce h2 */
+    }
+    nav ul li a {
+        font-size: 0.85rem; /* Slightly smaller nav links */
+        padding: 0.3rem 0.4rem;
+    }
+    .nav-left,
+    .nav-right {
+        width: 100%; /* Stack left/right nav fully */
+    }
+     .nav-left ul,
+     .nav-right ul {
+         justify-content: center;
+     }
+     .theme-toggle-button {
+          /* Adjust position slightly if needed due to stacked nav */
+     }
+}

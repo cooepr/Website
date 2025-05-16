@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Cycle Appointment Setting - Walden Reach</title>
+    <!-- Favicon Link -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Add Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <!-- Updated Header Structure -->
+    <header>
+        <div class="header-center-container">
+            <!-- Nav Left -->
+            <nav class="nav-left">
+                <ul>
+                    <!-- Link back to index.html sections -->
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                </ul>
+            </nav>
+
+            <!-- Logo Center -->
+            <div class="logo">
+                <a href="index.html#home"><img src="assets/images/logo.png" alt="Walden Reach Logo"></a>
+            </div>
+
+            <!-- Nav Right -->
+            <nav class="nav-right">
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="theme-toggle-button" aria-label="Toggle light/dark theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="service-detail-page">
+        <section id="service-detail-hero">
+            <div class="container">
+                <h1>Full-Cycle Appointment Setting</h1>
+                <p class="service-subtitle">From initial prospect research to confirmed meetings in your calendar – we handle it all.</p>
+            </div>
+        </section>
+
+        <section id="service-content">
+            <div class="container">
+                <div class="service-main-content">
+                    <div class="service-image-placeholder">
+                        <img src="#" alt="Full-Cycle Appointment Setting concept image">
+                    </div>
+                    <div class="service-description">
+                        <p>Our Full-Cycle Appointment Setting service is the ultimate solution for businesses looking to completely outsource their lead generation and appointment booking process. We take responsibility for the entire journey, from identifying the right prospects to securing qualified meetings for your sales team.</p>
+                        <p>This comprehensive package combines meticulous manual research, targeted list building, expert outreach, and proactive follow-up to ensure your calendar is consistently filled with high-potential sales opportunities. Focus on closing deals while we manage your pipeline.</p>
+                        <!-- Pricing information can be added here if desired -->
+                        <h3>Key Features:</h3>
+                        <ul>
+                            <li><strong>Manual Research:</strong> In-depth investigation to uncover hard-to-find prospects and gather critical business intelligence.</li>
+                            <li><strong>Targeted Leads:</strong> Precision-focused list building based on your Ideal Customer Profile.</li>
+                            <li><strong>Verified Leads:</strong> All contact information rigorously checked for accuracy and deliverability.</li>
+                            <li><strong>Cold Calling & Emailing:</strong> Professional, multi-channel outreach executed by our experienced team.</li>
+                            <li><strong>Leads Follow Up:</strong> Persistent and strategic follow-up to nurture interest and convert prospects into scheduled appointments.</li>
+                        </ul>
+                        <p>Choose our Full-Cycle Appointment Setting for a seamless, end-to-end solution that drives measurable sales growth.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enquiry Form Section -->
+        <section id="enquire" class="enquiry-section">
+            <div class="container">
+                <h2>Enquire Now</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">Interested in Full-Cycle Appointment Setting? Fill out the form below.</p>
+                <form class="contact-form fade-in-element" action="YOUR_FORMSPREE_ENDPOINT_URL" method="POST">
+                    <input type="hidden" name="_subject" value="Enquiry: Full-Cycle Appointment Setting">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <!-- Add name="_replyto" -->
+                        <input type="email" id="email" name="_replyto" required>
+                    </div>
+                    <!-- Subject field removed -->
+                    <div class="form-group">
+                        <label for="message">Tell us about your business:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Submit Enquiry</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Walden Reach. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Include script.js if header animations/logic are needed here too -->
+    <script src="script.js"></script>
+</body>
+</html> 
